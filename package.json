@@ -1,0 +1,46 @@
+{
+  "name": "andrii-vatazhko-donations",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Monorepo full-stack donations platform",
+  "type": "module",
+  "packageManager": "yarn@1.22.22",
+  "scripts": {
+    "lint": "eslint .",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "frontend:install": "yarn --cwd frontend install",
+    "backend:install": "yarn --cwd backend install",
+    "install:all": "yarn frontend:install && yarn backend:install",
+    "frontend:dev": "yarn --cwd frontend dev",
+    "backend:dev": "yarn --cwd backend dev",
+    "dev": "concurrently \"yarn backend:dev\" \"yarn frontend:dev\""
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eXocriador/andrii-vatazhko-donations.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eXocriador/andrii-vatazhko-donations/issues"
+  },
+  "homepage": "https://github.com/eXocriador/andrii-vatazhko-donations#readme",
+  "resolutions": {
+    "rollup": "4.52.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "concurrently": "^9.2.1",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^15.12.0",
+    "prettier": "^3.6.2"
+  }
+}
