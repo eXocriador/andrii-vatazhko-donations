@@ -5,7 +5,7 @@
   background-size: cover, cover;
   background-repeat: no-repeat, no-repeat;
   background-position: center, center;
-  background-attachment: scroll;
+  background-attachment: fixed, fixed;
 }
 
 .app {
