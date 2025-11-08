@@ -7,7 +7,6 @@ const Hero: FC = () => (
     <div className={styles.content}>
       <div className={styles.contentInner}>
         <p className={styles.kicker}>Допомога Херсонцям Безкоштовно</p>
-        <h1 className={styles.title}>Збираємо тепло для людей на лівому березі</h1>
         <p className={styles.subtitle}>
           Кожного тижня доставляємо ліки, продуктові набори, гігієну та підтримуємо звʼязок із
           близькими. Допомагаємо безкоштовно тим, хто під обстрілами й в евакуації.
