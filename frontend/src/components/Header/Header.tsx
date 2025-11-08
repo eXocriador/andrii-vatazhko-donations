@@ -32,7 +32,7 @@ const Header: FC = () => {
         ))}
       </nav>
       <div className={styles.actions}>
-        <Link className={styles.cta} to="/requisites">
+        <Link className={`${styles.cta} ${styles.ctaDesktop}`} to="/requisites">
           Задонатити
         </Link>
         <button

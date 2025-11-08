@@ -1,5 +1,5 @@
 .hero {
-  padding: 3rem 1.5rem 2.5rem;
+  padding: 2rem 1rem 2rem;
   position: relative;
 }
 
@@ -8,7 +8,7 @@
   margin: 0 auto;
   background: var(--bg-surface);
   border-radius: var(--radius-lg);
-  padding: 2.5rem 2rem;
+  padding: 2rem 1.5rem;
   border: 1px solid rgba(250, 176, 68, 0.25);
   box-shadow: var(--shadow-soft);
   position: relative;
@@ -56,6 +56,7 @@
   flex-wrap: wrap;
   gap: 0.85rem;
   margin-bottom: 2rem;
+  align-items: center;
 }
 
 .primaryCta {
@@ -78,30 +79,22 @@
   background: rgba(255, 240, 214, 0.5);
 }
 
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1rem;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.channelCta {
+  padding: 0.85rem 1.2rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  color: white;
+  background: #222;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  margin-left: auto;
 }
 
-.stats li {
-  background: var(--bg-surface-alt);
-  border-radius: 1rem;
-  padding: 1rem;
-  border: 1px solid rgba(255, 186, 109, 0.4);
-}
-
-.statNumber {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 700;
+.channelLink {
+  text-decoration: none;
   color: var(--accent-strong);
-}
-
-.statLabel {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }

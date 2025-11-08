@@ -64,7 +64,7 @@
 }
 
 .actions {
-  display: none;
+  display: flex;
   align-items: center;
   gap: 0.75rem;
 }
@@ -78,6 +78,10 @@
   text-decoration: none;
   box-shadow: 0 12px 30px rgba(249, 115, 22, 0.35);
   transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.ctaDesktop {
+  display: none;
 }
 
 .cta:hover {
@@ -109,19 +113,24 @@
 .mobileMenu {
   position: fixed;
   inset: 0;
-  background: rgba(255, 244, 231, 0.95);
+  background: linear-gradient(180deg, rgba(255, 247, 237, 0.98), rgba(255, 227, 194, 0.96));
   backdrop-filter: blur(6px);
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
+  padding: 1.5rem 1.25rem 2rem;
   z-index: 30;
+  row-gap: 1.5rem;
+  min-height: 100vh;
 }
 
 .close {
   align-self: flex-end;
   border: none;
-  background: transparent;
-  font-size: 2rem;
+  background: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.6rem;
   cursor: pointer;
   color: var(--text-primary);
 }
@@ -130,14 +139,14 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-top: 2rem;
 }
 
 .mobileLink {
   text-decoration: none;
   color: var(--text-secondary);
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
+  padding: 0.4rem 0;
 }
 
 .mobileLinkActive {
@@ -145,15 +154,16 @@
 }
 
 .mobileCta {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   display: inline-flex;
   justify-content: center;
   background: linear-gradient(120deg, var(--accent), var(--accent-strong));
   color: white;
-  padding: 0.75rem 1.4rem;
+  padding: 0.65rem 1.4rem;
   border-radius: 999px;
   font-weight: 600;
   text-decoration: none;
+  box-shadow: 0 12px 30px rgba(249, 115, 22, 0.35);
 }
 
 @media (min-width: 768px) {
@@ -165,15 +175,15 @@
     display: flex;
   }
 
-  .actions {
-    display: flex;
-  }
-
   .burger {
     display: none;
   }
 
   .mobileMenu {
     display: none;
+  }
+
+  .ctaDesktop {
+    display: inline-flex;
   }
 }
