@@ -51,18 +51,12 @@ const Donations: FC = () => {
 
   return (
     <section className={styles.section} id="donations">
-      <div className={styles.heading}>
-        <p className={styles.kicker}>Реквізити для допомоги</p>
-        <h2>Підтримай збори для Херсона прямо зараз</h2>
-        <p>
-          Обери спосіб: банківський переказ, monobank, PayPal або USDT. Після донату надішли чек у
-          Telegram — заносимо все в прозорий публічний звіт.
-        </p>
-      </div>
-
       <div className={styles.layout}>
         {requisites.map((req) => (
-          <article key={req.label} className={`${styles.card} ${styles[`brand-${req.brand}`] ?? ''}`}>
+          <article
+            key={req.label}
+            className={`${styles.card} ${styles[`brand-${req.brand}`] ?? ''}`}
+          >
             <div className={styles.cardHeader}>
               <span className={styles.brand}>{brandBadge[req.brand]}</span>
               <p className={styles.label}>{req.label}</p>

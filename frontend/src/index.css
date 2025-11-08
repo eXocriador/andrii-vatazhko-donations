@@ -4,7 +4,6 @@
   line-height: 1.5;
   font-weight: 400;
   color: #1f130a;
-  background-color: #fff6eb;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -33,10 +32,22 @@
   box-sizing: border-box;
 }
 
+html {
+  min-height: 100vh;
+  height: 100%;
+  background-color: var(--bg-body);
+  background-image: var(--app-bg-gradient), var(--app-bg-image);
+  background-size: cover, cover;
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, center;
+  background-attachment: fixed, fixed;
+  overflow-y: scroll;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--bg-body);
+  background: transparent;
   color: var(--text-primary);
 }
 
