@@ -1,0 +1,85 @@
+.footer {
+  margin-top: 2rem;
+  background: #fff7ed;
+  border-radius: 1.25rem 1.25rem 0 0;
+  padding: 1.5rem 1.25rem;
+  border-top: 1px solid #fed7aa;
+  box-shadow: 0 -20px 60px rgba(249, 115, 22, 0.1);
+  text-align: center;
+}
+
+.topRow {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.devBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.devLabel {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  color: #f97316;
+  margin: 0;
+}
+
+.devName {
+  margin: 0;
+  font-weight: 600;
+  color: #79350f;
+  font-size: 0.95rem;
+}
+
+.links {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.iconLink {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #fcd34d;
+  background: #fff0d6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+  color: #b45309;
+}
+
+.iconLink svg {
+  width: 18px;
+  height: 18px;
+}
+
+.iconLink:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(249, 115, 22, 0.25);
+  border-color: #f97316;
+}
+
+@media (min-width: 768px) {
+  .footer {
+    padding: 1.75rem 3rem;
+  }
+
+  .topRow {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+
+  .devBlock {
+    min-width: 220px;
+  }
+}
