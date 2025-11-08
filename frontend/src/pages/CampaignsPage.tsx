@@ -18,8 +18,7 @@ const activeCampaigns: Campaign[] = [
   {
     id: 'boats-2025',
     title: 'Катери та мотори для Херсонської евакуації',
-    summary:
-      'Фінансуємо 2 гумові човни, ехо-лод та мотори, щоби вивозити людей з підтоплених сіл.',
+    summary: 'Фінансуємо 2 гумові човни, ехо-лод та мотори, щоби вивозити людей з підтоплених сіл.',
     goal: 420000,
     raised: 235000,
     deadline: '28 бер 2025',
@@ -58,21 +57,25 @@ const CampaignsPage: FC = () => {
 
   return (
     <section className={styles.page}>
-      <div className={styles.heading}>
+      {/* <div className={styles.heading}>
         <h1>Керування зборами</h1>
         <p>Відстежуй активні кампанії та переглядай звіти для вже закритих зборів.</p>
-      </div>
+      </div> */}
       <div className={styles.tabs}>
         <button
           type="button"
-          className={tab === 'active' ? `${styles.tabButton} ${styles.tabButtonActive}` : styles.tabButton}
+          className={
+            tab === 'active' ? `${styles.tabButton} ${styles.tabButtonActive}` : styles.tabButton
+          }
           onClick={() => setTab('active')}
         >
           Активні збори
         </button>
         <button
           type="button"
-          className={tab === 'reports' ? `${styles.tabButton} ${styles.tabButtonActive}` : styles.tabButton}
+          className={
+            tab === 'reports' ? `${styles.tabButton} ${styles.tabButtonActive}` : styles.tabButton
+          }
           onClick={() => setTab('reports')}
         >
           Закриті / звіти
