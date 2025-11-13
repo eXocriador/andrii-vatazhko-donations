@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import AboutPage from './pages/AboutPage'
 import RequisitesPage from './pages/RequisitesPage'
 import CampaignsPage from './pages/CampaignsPage'
+import CampaignReportPage from './pages/CampaignReportPage'
 
 const App: FC = () => (
   <BrowserRouter>
@@ -19,6 +20,7 @@ const App: FC = () => (
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/campaigns" element={<CampaignsPage />} />
+          <Route path="/campaigns/:id/report" element={<CampaignReportPage />} />
           <Route path="/requisites" element={<RequisitesPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

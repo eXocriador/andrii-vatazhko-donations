@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react'
 import type { FC } from 'react'
 import { Link } from 'react-router-dom'
-import Reports from '../components/Reports/Reports'
+import { reports } from '../data/reports'
 import styles from './CampaignsPage.module.css'
+
+type CampaignStatus = 'active' | 'closed'
 
 type Campaign = {
   id: string
@@ -12,6 +14,7 @@ type Campaign = {
   raised: number
   deadline: string
   tags: string[]
+  status: CampaignStatus
 }
 
 const activeCampaigns: Campaign[] = [
@@ -23,6 +26,7 @@ const activeCampaigns: Campaign[] = [
     raised: 235000,
     deadline: '28 бер 2025',
     tags: ['Евакуація', 'Гуманітарка'],
+    status: 'active',
   },
   {
     id: 'med-2025',
@@ -33,6 +37,7 @@ const activeCampaigns: Campaign[] = [
     raised: 148000,
     deadline: '10 кві 2025',
     tags: ['Медицина', 'Штурмові групи'],
+    status: 'active',
   },
   {
     id: 'drones-2025',
@@ -42,8 +47,20 @@ const activeCampaigns: Campaign[] = [
     raised: 402000,
     deadline: '02 тра 2025',
     tags: ['FPV', 'Розвідка'],
+    status: 'active',
   },
 ]
+
+const closedCampaigns: Campaign[] = reports.map((report) => ({
+  id: report.id,
+  title: report.title,
+  summary: report.summary,
+  goal: report.goal,
+  raised: report.amountRaised,
+  deadline: report.date,
+  tags: report.tags,
+  status: 'closed' as const,
+}))
 
 const currency = new Intl.NumberFormat('uk-UA', {
   style: 'currency',
@@ -51,9 +68,54 @@ const currency = new Intl.NumberFormat('uk-UA', {
   maximumFractionDigits: 0,
 })
 
+const CampaignCard: FC<{ campaign: Campaign }> = ({ campaign }) => {
+  const progress = Math.min(100, Math.round((campaign.raised / campaign.goal) * 100))
+  const isClosed = campaign.status === 'closed'
+
+  return (
+    <article className={`${styles.card} ${isClosed ? styles.cardClosed : ''}`}>
+      <div className={styles.cardHeader}>
+        <span className={`${styles.statusBadge} ${isClosed ? styles.statusClosed : styles.statusActive}`}>
+          {isClosed ? 'Збір завершено' : 'Активний збір'}
+        </span>
+        <div>
+          <h3>{campaign.title}</h3>
+          <p>{campaign.summary}</p>
+        </div>
+      </div>
+      <div className={styles.meta}>
+        <span>
+          {currency.format(campaign.raised)} з {currency.format(campaign.goal)}
+        </span>
+        <span>{isClosed ? `Закрито: ${campaign.deadline}` : `До: ${campaign.deadline}`}</span>
+      </div>
+      <div className={styles.progressBarWrapper}>
+        <div
+          className={`${styles.progressBar} ${isClosed ? styles.progressBarClosed : ''}`}
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+      <div className={styles.tags}>
+        {campaign.tags.map((tag) => (
+          <span key={tag} className={styles.tag}>
+            {tag}
+          </span>
+        ))}
+      </div>
+      <Link
+        to={isClosed ? `/campaigns/${campaign.id}/report` : '/requisites'}
+        className={`${styles.cta} ${isClosed ? styles.ctaGhost : ''}`}
+      >
+        {isClosed ? 'Переглянути звіт' : 'Підтримати'}
+      </Link>
+    </article>
+  )
+}
+
 const CampaignsPage: FC = () => {
   const [tab, setTab] = useState<'active' | 'reports'>('active')
   const campaigns = useMemo(() => activeCampaigns, [])
+  const finishedCampaigns = useMemo(() => closedCampaigns, [])
 
   return (
     <section className={styles.page}>
@@ -83,38 +145,17 @@ const CampaignsPage: FC = () => {
       </div>
 
       {tab === 'active' ? (
-        <div className={styles.grid}>
-          {campaigns.map((campaign) => {
-            const progress = Math.min(100, Math.round((campaign.raised / campaign.goal) * 100))
-            return (
-              <article key={campaign.id} className={styles.card}>
-                <h3>{campaign.title}</h3>
-                <p>{campaign.summary}</p>
-                <div className={styles.meta}>
-                  <span>
-                    {currency.format(campaign.raised)} з {currency.format(campaign.goal)}
-                  </span>
-                  <span>{campaign.deadline}</span>
-                </div>
-                <div className={styles.progressBarWrapper}>
-                  <div className={styles.progressBar} style={{ width: `${progress}%` }} />
-                </div>
-                <div className={styles.tags}>
-                  {campaign.tags.map((tag) => (
-                    <span key={tag} className={styles.tag}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <Link to="/requisites" className={styles.cta}>
-                  Підтримати
-                </Link>
-              </article>
-            )
-          })}
+        <div className={styles.list}>
+          {campaigns.map((campaign) => (
+            <CampaignCard key={campaign.id} campaign={campaign} />
+          ))}
         </div>
       ) : (
-        <Reports />
+        <div className={styles.list}>
+          {finishedCampaigns.map((campaign) => (
+            <CampaignCard key={campaign.id} campaign={campaign} />
+          ))}
+        </div>
       )}
     </section>
   )

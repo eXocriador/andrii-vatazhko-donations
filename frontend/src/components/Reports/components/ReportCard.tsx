@@ -1,18 +1,7 @@
 import { useState } from 'react'
 import type { FC } from 'react'
+import type { Report } from '../../../types/report'
 import styles from './ReportCard.module.css'
-
-export type Report = {
-  id: string
-  title: string
-  date: string
-  amountRaised: number
-  goal: number
-  summary: string
-  details: string
-  itemsDelivered: string[]
-  images: { src: string; alt: string }[]
-}
 
 const formatCurrency = (value: number) =>
   new Intl.NumberFormat('uk-UA', {

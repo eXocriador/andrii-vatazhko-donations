@@ -35,21 +35,30 @@
   box-shadow: 0 12px 25px rgba(249, 115, 22, 0.25);
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.25rem;
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
 }
 
 .card {
   border: 1px solid var(--border-soft);
   border-radius: var(--radius-md);
-  padding: 1.25rem;
+  padding: 1.4rem;
   background: var(--bg-surface-alt);
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
-  box-shadow: 0 18px 40px rgba(201, 138, 49, 0.12);
+  box-shadow: 0 18px 40px rgba(201, 138, 49, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 25px 45px rgba(201, 138, 49, 0.16);
 }
 
 .card h3 {
@@ -62,23 +71,63 @@
   color: var(--text-secondary);
 }
 
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.statusBadge {
+  align-self: flex-start;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.statusActive {
+  background: rgba(249, 137, 22, 0.12);
+  color: var(--accent-strong);
+  border-color: rgba(249, 137, 22, 0.4);
+}
+
+.statusClosed {
+  background: rgba(96, 109, 128, 0.08);
+  color: var(--text-muted);
+  border-color: rgba(96, 109, 128, 0.2);
+}
+
+.cardClosed {
+  background: var(--bg-surface);
+}
+
 .meta {
   display: flex;
   justify-content: space-between;
   font-size: 0.9rem;
   color: var(--text-muted);
+  gap: 0.75rem;
 }
 
 .progressBarWrapper {
   background: rgba(255, 240, 214, 0.9);
   border-radius: 999px;
-  height: 8px;
+  height: 10px;
+  overflow: hidden;
 }
 
 .progressBar {
   height: 100%;
   border-radius: inherit;
   background: linear-gradient(120deg, var(--accent), var(--accent-strong));
+  transition: width 0.4s ease, background 0.3s ease;
+}
+
+.progressBarClosed {
+  background: linear-gradient(120deg, rgba(94, 107, 132, 0.8), rgba(94, 107, 132, 0.6));
 }
 
 .tags {
@@ -97,19 +146,47 @@
 
 .cta {
   margin-top: auto;
-  align-self: flex-start;
-  padding: 0.55rem 1.2rem;
+  align-self: stretch;
+  padding: 0.65rem 1.35rem;
   border-radius: 999px;
   border: none;
   background: linear-gradient(120deg, var(--accent), var(--accent-strong));
   color: white;
   font-weight: 600;
   text-decoration: none;
+  text-align: center;
   box-shadow: 0 12px 25px rgba(249, 115, 22, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.3s ease, opacity 0.2s ease;
+}
+
+.cta:hover,
+.cta:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 32px rgba(249, 115, 22, 0.35);
+}
+
+.cta:active {
+  transform: translateY(1px);
+}
+
+.cta:focus-visible {
+  outline: 3px solid rgba(249, 115, 22, 0.25);
+  outline-offset: 3px;
+}
+
+.ctaGhost {
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--text-primary);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: none;
 }
 
 @media (min-width: 768px) {
   .page {
     padding: 2.4rem 0;
+  }
+
+  .list {
+    gap: 1.25rem;
   }
 }
