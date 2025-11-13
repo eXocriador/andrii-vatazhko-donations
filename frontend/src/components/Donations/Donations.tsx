@@ -15,15 +15,15 @@ type Requisite = {
 const requisites: Requisite[] = [
   {
     label: 'Monobank Банка',
-    value: 'https://send.monobank.ua/jar/AQiZzDnzDN',
-    description: 'Швидко задонатити карткою або Apple/Google Pay.',
+    value: 'https://send.monobank.ua/jar/K7etYH1QC',
+    description: 'Офіційна банка для швидких переказів карткою чи Apple/Google Pay.',
     brand: 'monobank',
     isLink: true,
   },
   {
-    label: 'Картка (UAH)',
-    value: '4874 1000 2815 7041',
-    description: 'Пряма картка Мирослави Титаренко для миттєвих переказів.',
+    label: 'Карта до банки',
+    value: '5375 4112 1940 2984',
+    description: 'Якщо зручніше переказати напряму на картку, привʼязану до банки.',
     brand: 'card',
   },
   {
@@ -68,7 +68,7 @@ const Donations: FC = () => {
                 href={req.value}
                 target="_blank"
                 rel="noreferrer"
-                className={`${styles.actionButton} ${styles.actionSecondary}`}
+                className={styles.actionButton}
               >
                 Відкрити форму
               </a>
