@@ -29,14 +29,18 @@ const ReportCard: FC<{ report: Report }> = ({ report }) => {
   const progress = Math.min(100, Math.round((report.amountRaised / report.goal) * 100))
 
   return (
-    <article className={styles.card}>
+    <article className={`uiCard ${styles.card}`}>
       <header className={styles.header}>
         <div>
           <p className={styles.date}>{report.date}</p>
           <h3>{report.title}</h3>
           <p className={styles.summary}>{report.summary}</p>
         </div>
-        <button type="button" className={styles.toggle} onClick={() => setOpen(!open)}>
+        <button
+          type="button"
+          className={`uiButton uiButton--ghost ${styles.toggle}`}
+          onClick={() => setOpen(!open)}
+        >
           {open ? 'Згорнути' : 'Детальніше'}
         </button>
       </header>

@@ -55,7 +55,7 @@ const Donations: FC = () => {
         {requisites.map((req) => (
           <article
             key={req.label}
-            className={`${styles.card} ${styles[`brand-${req.brand}`] ?? ''}`}
+            className={`uiCard ${styles.card} ${styles[`brand-${req.brand}`] ?? ''}`}
           >
             <div className={styles.cardHeader}>
               <span className={styles.brand}>{brandBadge[req.brand]}</span>
@@ -68,14 +68,14 @@ const Donations: FC = () => {
                 href={req.value}
                 target="_blank"
                 rel="noreferrer"
-                className={styles.actionButton}
+                className={`uiButton uiButton--outline uiButton--block ${styles.actionButton}`}
               >
                 Відкрити форму
               </a>
             ) : (
               <button
                 type="button"
-                className={styles.actionButton}
+                className={`uiButton uiButton--block ${styles.actionButton}`}
                 onClick={() => handleCopy(req.value, req.label)}
               >
                 {copied === req.label ? 'Скопійовано' : 'Скопіювати реквізит'}

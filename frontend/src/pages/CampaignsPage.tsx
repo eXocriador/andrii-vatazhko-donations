@@ -73,7 +73,7 @@ const CampaignCard: FC<{ campaign: Campaign }> = ({ campaign }) => {
   const isClosed = campaign.status === 'closed'
 
   return (
-    <article className={`${styles.card} ${isClosed ? styles.cardClosed : ''}`}>
+    <article className={`uiCard ${styles.card} ${isClosed ? styles.cardClosed : ''}`}>
       <div className={styles.cardHeader}>
         <span className={`${styles.statusBadge} ${isClosed ? styles.statusClosed : styles.statusActive}`}>
           {isClosed ? 'Збір завершено' : 'Активний збір'}
@@ -97,14 +97,14 @@ const CampaignCard: FC<{ campaign: Campaign }> = ({ campaign }) => {
       </div>
       <div className={styles.tags}>
         {campaign.tags.map((tag) => (
-          <span key={tag} className={styles.tag}>
+          <span key={tag} className={`uiTag ${styles.tag}`}>
             {tag}
           </span>
         ))}
       </div>
       <Link
         to={isClosed ? `/campaigns/${campaign.id}/report` : '/requisites'}
-        className={`${styles.cta} ${isClosed ? styles.ctaGhost : ''}`}
+        className={`uiButton ${styles.cta} ${isClosed ? 'uiButton--ghost' : ''}`}
       >
         {isClosed ? 'Переглянути звіт' : 'Підтримати'}
       </Link>

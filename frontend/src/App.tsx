@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
+import './styles/ui.css'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import ScrollToTop from './components/common/ScrollToTop'

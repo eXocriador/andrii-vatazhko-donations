@@ -22,11 +22,11 @@ const CampaignReportPage: FC = () => {
 
   return (
     <section className={styles.page}>
-      <Link to="/campaigns" className={styles.backLink}>
+      <Link to="/campaigns" className={`uiBackLink ${styles.backLink}`}>
         ← Повернутися до зборів
       </Link>
 
-      <article className={styles.reportCard}>
+      <article className={`uiCard ${styles.reportCard}`}>
         <div className={styles.header}>
           <div>
             <span className={styles.date}>{report.date}</span>
@@ -34,7 +34,7 @@ const CampaignReportPage: FC = () => {
             <p className={styles.summary}>{report.summary}</p>
             <div className={styles.tagList}>
               {report.tags.map((tag) => (
-                <span key={tag} className={styles.tag}>
+                <span key={tag} className={`uiTag ${styles.tag}`}>
                   {tag}
                 </span>
               ))}
@@ -97,7 +97,7 @@ const CampaignReportPage: FC = () => {
         </div>
 
         <div className={styles.actions}>
-          <Link to="/requisites" className={styles.cta}>
+          <Link to="/requisites" className={`uiButton ${styles.cta}`}>
             Підтримати наступний збір
           </Link>
         </div>
