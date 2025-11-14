@@ -1,0 +1,206 @@
+:root {
+  color-scheme: light;
+  --bg-body: #fff6eb;
+  --bg-surface: #fffefb;
+  --bg-surface-alt: #fff3de;
+  --text-primary: #2f1404;
+  --text-secondary: #704215;
+  --text-muted: #a16a2b;
+  --accent: #f97316;
+  --accent-strong: #ea580c;
+  --border-soft: #fcd9ab;
+  --border-bold: #f5b56a;
+  --shadow-soft: 0 20px 45px rgba(203, 130, 25, 0.18);
+  --shadow-strong: 0 30px 70px rgba(210, 132, 27, 0.25);
+  --radius-lg: 1.5rem;
+  --radius-md: 1rem;
+  --app-bg-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.8));
+  --app-bg-image: url('/kherson.webp');
+  --header-bg: rgba(255, 255, 255, 0.92);
+  --header-shadow: 0 12px 32px rgba(203, 130, 25, 0.18);
+  --header-burger-bg: #fff7ed;
+  --mobile-menu-bg: linear-gradient(180deg, rgba(255, 247, 237, 0.98), rgba(255, 227, 194, 0.96));
+  --mobile-menu-blur: 6px;
+  --mobile-close-bg: #ffffff;
+  --mobile-cta-shadow: 0 12px 30px rgba(249, 115, 22, 0.35);
+  --hero-surface: rgba(255, 255, 255, 0.95);
+  --hero-border: rgba(250, 176, 68, 0.25);
+  --hero-shadow: 0 42px 80px rgba(212, 149, 72, 0.25);
+  --hero-highlight: radial-gradient(circle at 85% 15%, rgba(255, 201, 120, 0.45), transparent 60%);
+  --hero-meta-surface: rgba(255, 255, 255, 0.92);
+  --hero-meta-border: rgba(249, 178, 95, 0.35);
+  --theme-switch-bg: rgba(255, 255, 255, 0.82);
+  --theme-switch-border: rgba(0, 0, 0, 0.08);
+  --theme-switch-menu-bg: rgba(255, 255, 255, 0.98);
+  --theme-switch-menu-border: rgba(0, 0, 0, 0.05);
+  --theme-switch-menu-shadow: 0 26px 55px rgba(93, 51, 17, 0.18);
+  --theme-switch-item-hover: rgba(249, 115, 22, 0.08);
+  --theme-switch-item-active: rgba(249, 115, 22, 0.12);
+  --footer-bg: #fff7ed;
+  --footer-border: #fed7aa;
+  --footer-shadow: 0 -20px 60px rgba(249, 115, 22, 0.1);
+  --footer-text: #79350f;
+  --footer-accent: #f97316;
+  --footer-icon-bg: #fff0d6;
+  --footer-icon-border: #fcd34d;
+  --footer-icon-color: #b45309;
+  --success: #16a34a;
+  --success-strong: #22c55e;
+  --success-soft: rgba(34, 197, 94, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg-body: #080605;
+    --bg-surface: #14100c;
+    --bg-surface-alt: #1d150f;
+    --text-primary: #f7eee4;
+    --text-secondary: #e3c3a2;
+    --text-muted: #c89a71;
+    --accent: #f78a3c;
+    --accent-strong: #f26b1d;
+    --border-soft: rgba(255, 255, 255, 0.14);
+    --border-bold: rgba(255, 255, 255, 0.28);
+    --shadow-soft: 0 22px 46px rgba(0, 0, 0, 0.55);
+    --shadow-strong: 0 40px 90px rgba(0, 0, 0, 0.75);
+    --app-bg-gradient:
+      linear-gradient(180deg, rgba(5, 3, 2, 0.58), rgba(4, 3, 2, 0.7)),
+      radial-gradient(circle at 20% 20%, rgba(48, 30, 16, 0.35) 0%, rgba(8, 6, 4, 0.6) 45%),
+      radial-gradient(circle at 80% 0%, rgba(65, 43, 24, 0.22) 0%, rgba(7, 5, 3, 0.55) 50%);
+    --app-bg-image: url('/kherson.webp');
+    --header-bg: rgba(17, 13, 10, 0.94);
+    --header-shadow: 0 18px 38px rgba(0, 0, 0, 0.65);
+    --header-burger-bg: rgba(255, 255, 255, 0.08);
+    --mobile-menu-bg: linear-gradient(180deg, rgba(8, 6, 4, 0.98), rgba(5, 4, 3, 0.94));
+    --mobile-menu-blur: 12px;
+    --mobile-close-bg: rgba(255, 255, 255, 0.08);
+    --mobile-cta-shadow: 0 18px 36px rgba(0, 0, 0, 0.65);
+    --hero-surface: rgba(20, 15, 10, 0.92);
+    --hero-border: rgba(255, 255, 255, 0.08);
+    --hero-shadow: 0 45px 90px rgba(0, 0, 0, 0.6);
+    --hero-highlight: radial-gradient(circle at 75% 10%, rgba(255, 166, 94, 0.16), transparent 55%);
+    --hero-meta-surface: rgba(22, 17, 12, 0.9);
+    --hero-meta-border: rgba(255, 255, 255, 0.08);
+    --theme-switch-bg: rgba(22, 17, 12, 0.85);
+    --theme-switch-border: rgba(255, 255, 255, 0.15);
+    --theme-switch-menu-bg: rgba(18, 13, 9, 0.98);
+    --theme-switch-menu-border: rgba(255, 255, 255, 0.08);
+    --theme-switch-menu-shadow: 0 28px 60px rgba(0, 0, 0, 0.7);
+    --theme-switch-item-hover: rgba(255, 255, 255, 0.08);
+    --theme-switch-item-active: rgba(255, 255, 255, 0.14);
+    --footer-bg: rgba(17, 13, 10, 0.94);
+    --footer-border: rgba(255, 255, 255, 0.08);
+    --footer-shadow: 0 -35px 70px rgba(0, 0, 0, 0.55);
+    --footer-text: #f4e3d2;
+    --footer-accent: #fbc074;
+    --footer-icon-bg: rgba(255, 255, 255, 0.08);
+    --footer-icon-border: rgba(255, 255, 255, 0.18);
+    --footer-icon-color: #ffe3c5;
+    --success: #22db7c;
+    --success-strong: #8ef3b0;
+    --success-soft: rgba(34, 219, 124, 0.15);
+  }
+}
+
+/* Manual overrides driven by the ThemeSwitch data-theme attribute */
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg-body: #fff6eb;
+  --bg-surface: #fffefb;
+  --bg-surface-alt: #fff3de;
+  --text-primary: #2f1404;
+  --text-secondary: #704215;
+  --text-muted: #a16a2b;
+  --accent: #f97316;
+  --accent-strong: #ea580c;
+  --border-soft: #fcd9ab;
+  --border-bold: #f5b56a;
+  --shadow-soft: 0 20px 45px rgba(203, 130, 25, 0.18);
+  --shadow-strong: 0 30px 70px rgba(210, 132, 27, 0.25);
+  --app-bg-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.8));
+  --app-bg-image: url('/kherson.webp');
+  --header-bg: rgba(255, 255, 255, 0.92);
+  --header-shadow: 0 12px 32px rgba(203, 130, 25, 0.18);
+  --header-burger-bg: #fff7ed;
+  --mobile-menu-bg: linear-gradient(180deg, rgba(255, 247, 237, 0.98), rgba(255, 227, 194, 0.96));
+  --mobile-menu-blur: 6px;
+  --mobile-close-bg: #ffffff;
+  --mobile-cta-shadow: 0 12px 30px rgba(249, 115, 22, 0.35);
+  --hero-surface: rgba(255, 255, 255, 0.95);
+  --hero-border: rgba(250, 176, 68, 0.25);
+  --hero-shadow: 0 42px 80px rgba(212, 149, 72, 0.25);
+  --hero-highlight: radial-gradient(circle at 85% 15%, rgba(255, 201, 120, 0.45), transparent 60%);
+  --hero-meta-surface: rgba(255, 255, 255, 0.92);
+  --hero-meta-border: rgba(249, 178, 95, 0.35);
+  --theme-switch-bg: rgba(255, 255, 255, 0.82);
+  --theme-switch-border: rgba(0, 0, 0, 0.08);
+  --theme-switch-menu-bg: rgba(255, 255, 255, 0.98);
+  --theme-switch-menu-border: rgba(0, 0, 0, 0.05);
+  --theme-switch-menu-shadow: 0 26px 55px rgba(93, 51, 17, 0.18);
+  --theme-switch-item-hover: rgba(249, 115, 22, 0.08);
+  --theme-switch-item-active: rgba(249, 115, 22, 0.12);
+  --footer-bg: #fff7ed;
+  --footer-border: #fed7aa;
+  --footer-shadow: 0 -20px 60px rgba(249, 115, 22, 0.1);
+  --footer-text: #79350f;
+  --footer-accent: #f97316;
+  --footer-icon-bg: #fff0d6;
+  --footer-icon-border: #fcd34d;
+  --footer-icon-color: #b45309;
+  --success: #16a34a;
+  --success-strong: #22c55e;
+  --success-soft: rgba(34, 197, 94, 0.12);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg-body: #080605;
+  --bg-surface: #14100c;
+  --bg-surface-alt: #1d150f;
+  --text-primary: #f7eee4;
+  --text-secondary: #e3c3a2;
+  --text-muted: #c89a71;
+  --accent: #f78a3c;
+  --accent-strong: #f26b1d;
+  --border-soft: rgba(255, 255, 255, 0.14);
+  --border-bold: rgba(255, 255, 255, 0.28);
+  --shadow-soft: 0 22px 46px rgba(0, 0, 0, 0.55);
+  --shadow-strong: 0 40px 90px rgba(0, 0, 0, 0.75);
+  --app-bg-gradient:
+    linear-gradient(180deg, rgba(5, 3, 2, 0.58), rgba(4, 3, 2, 0.7)),
+    radial-gradient(circle at 20% 20%, rgba(48, 30, 16, 0.35) 0%, rgba(8, 6, 4, 0.6) 45%),
+    radial-gradient(circle at 80% 0%, rgba(65, 43, 24, 0.22) 0%, rgba(7, 5, 3, 0.55) 50%);
+  --app-bg-image: url('/kherson.webp');
+  --header-bg: rgba(17, 13, 10, 0.94);
+  --header-shadow: 0 18px 38px rgba(0, 0, 0, 0.65);
+  --header-burger-bg: rgba(255, 255, 255, 0.08);
+  --mobile-menu-bg: linear-gradient(180deg, rgba(8, 6, 4, 0.98), rgba(5, 4, 3, 0.94));
+  --mobile-menu-blur: 12px;
+  --mobile-close-bg: rgba(255, 255, 255, 0.08);
+  --mobile-cta-shadow: 0 18px 36px rgba(0, 0, 0, 0.65);
+  --hero-surface: rgba(20, 15, 10, 0.92);
+  --hero-border: rgba(255, 255, 255, 0.08);
+  --hero-shadow: 0 45px 90px rgba(0, 0, 0, 0.6);
+  --hero-highlight: radial-gradient(circle at 75% 10%, rgba(255, 166, 94, 0.16), transparent 55%);
+  --hero-meta-surface: rgba(22, 17, 12, 0.9);
+  --hero-meta-border: rgba(255, 255, 255, 0.08);
+  --theme-switch-bg: rgba(22, 17, 12, 0.85);
+  --theme-switch-border: rgba(255, 255, 255, 0.15);
+  --theme-switch-menu-bg: rgba(18, 13, 9, 0.98);
+  --theme-switch-menu-border: rgba(255, 255, 255, 0.08);
+  --theme-switch-menu-shadow: 0 28px 60px rgba(0, 0, 0, 0.7);
+  --theme-switch-item-hover: rgba(255, 255, 255, 0.08);
+  --theme-switch-item-active: rgba(255, 255, 255, 0.14);
+  --footer-bg: rgba(17, 13, 10, 0.94);
+  --footer-border: rgba(255, 255, 255, 0.08);
+  --footer-shadow: 0 -35px 70px rgba(0, 0, 0, 0.55);
+  --footer-text: #f4e3d2;
+  --footer-accent: #fbc074;
+  --footer-icon-bg: rgba(255, 255, 255, 0.08);
+  --footer-icon-border: rgba(255, 255, 255, 0.18);
+  --footer-icon-color: #ffe3c5;
+  --success: #22db7c;
+  --success-strong: #8ef3b0;
+  --success-soft: rgba(34, 219, 124, 0.15);
+}

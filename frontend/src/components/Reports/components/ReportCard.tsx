@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { FC } from 'react'
+import Lightbox from '../../Lightbox/Lightbox'
 import type { Report } from '../../../types/report'
 import styles from './ReportCard.module.css'
 
@@ -26,7 +27,15 @@ const buildImageSrc = (url: string) => {
 
 const ReportCard: FC<{ report: Report }> = ({ report }) => {
   const [open, setOpen] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const progress = Math.min(100, Math.round((report.amountRaised / report.goal) * 100))
+  const galleryImages = report.images.map((image) => ({
+    src: buildImageSrc(image.src),
+    alt: image.alt,
+  }))
+
+  const handleOpenLightbox = (index: number) => setLightboxIndex(index)
+  const handleCloseLightbox = () => setLightboxIndex(null)
 
   return (
     <article className={`uiCard ${styles.card}`}>
@@ -62,21 +71,30 @@ const ReportCard: FC<{ report: Report }> = ({ report }) => {
             ))}
           </ul>
           <div className={styles.gallery}>
-            {report.images.map((image) => (
-              <figure key={image.src}>
-                <img
-                  src={buildImageSrc(image.src)}
-                  alt={image.alt}
-                  loading="lazy"
-                  decoding="async"
-                  width={400}
-                  height={240}
-                />
+            {galleryImages.map((image, idx) => (
+              <figure
+                key={image.src}
+                tabIndex={0}
+                role="button"
+                onClick={() => handleOpenLightbox(idx)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') handleOpenLightbox(idx)
+                }}
+              >
+                <img src={image.src} alt={image.alt} loading="lazy" decoding="async" width={400} height={240} />
                 <figcaption>{image.alt}</figcaption>
               </figure>
             ))}
           </div>
         </div>
+      )}
+      {galleryImages.length > 0 && (
+        <Lightbox
+          images={galleryImages}
+          index={lightboxIndex ?? 0}
+          open={lightboxIndex !== null}
+          onClose={handleCloseLightbox}
+        />
       )}
     </article>
   )

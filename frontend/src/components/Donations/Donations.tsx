@@ -50,7 +50,7 @@ const Donations: FC = () => {
   }
 
   return (
-    <section className={styles.section} id="donations">
+    <section className={`${styles.section} pageShell`} id="donations">
       <div className={styles.layout}>
         {requisites.map((req) => (
           <article

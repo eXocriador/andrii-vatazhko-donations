@@ -84,6 +84,12 @@
   overflow: hidden;
   border: 1px solid rgba(203, 130, 25, 0.2);
   background: #fff;
+  cursor: pointer;
+}
+
+.gallery figure:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .gallery img {

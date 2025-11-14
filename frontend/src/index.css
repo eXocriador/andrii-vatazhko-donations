@@ -3,27 +3,10 @@
     'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #1f130a;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --bg-body: #fff6eb;
-  --bg-surface: #fffefb;
-  --bg-surface-alt: #fff3de;
-  --text-primary: #2f1404;
-  --text-secondary: #704215;
-  --text-muted: #a16a2b;
-  --accent: #f97316;
-  --accent-strong: #ea580c;
-  --border-soft: #fcd9ab;
-  --border-bold: #f5b56a;
-  --shadow-soft: 0 20px 45px rgba(203, 130, 25, 0.18);
-  --shadow-strong: 0 30px 70px rgba(210, 132, 27, 0.25);
-  --radius-lg: 1.5rem;
-  --radius-md: 1rem;
-  --app-bg-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.8));
-  --app-bg-image: url('/kherson.webp');
 }
 
 *,

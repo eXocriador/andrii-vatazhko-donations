@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import type { FC } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
+import Lightbox from '../components/Lightbox/Lightbox'
 import { getReportById } from '../data/reports'
 import styles from './CampaignReportPage.module.css'
 
@@ -18,10 +20,20 @@ const CampaignReportPage: FC = () => {
   }
 
   const progress = Math.min(100, Math.round((report.amountRaised / report.goal) * 100))
-  const [heroImage, ...additionalImages] = report.images
+  const images = report.images.map((image) => ({ src: image.src, alt: image.alt }))
+  const [heroImage, ...additionalImages] = images
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+
+  const openLightbox = (start = 0) => {
+    if (images.length > 0) {
+      setLightboxIndex(start)
+    }
+  }
+
+  const closeLightbox = () => setLightboxIndex(null)
 
   return (
-    <section className={styles.page}>
+    <section className={`${styles.page} pageShell`}>
       <Link to="/campaigns" className={`uiBackLink ${styles.backLink}`}>
         ← Повернутися до зборів
       </Link>
@@ -42,7 +54,14 @@ const CampaignReportPage: FC = () => {
           </div>
           <div className={styles.heroMedia}>
             {heroImage ? (
-              <figure>
+              <figure
+                role="button"
+                tabIndex={0}
+                onClick={() => openLightbox(0)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') openLightbox(0)
+                }}
+              >
                 <img src={heroImage.src} alt={heroImage.alt} loading="lazy" decoding="async" />
                 <figcaption>{heroImage.alt}</figcaption>
               </figure>
@@ -83,18 +102,11 @@ const CampaignReportPage: FC = () => {
           </ul>
         </div>
 
-        <div className={styles.gallery}>
-          {additionalImages.length > 0 ? (
-            additionalImages.map((image) => (
-              <figure key={image.src}>
-                <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
-                <figcaption>{image.alt}</figcaption>
-              </figure>
-            ))
-          ) : (
-            <div className={styles.galleryPlaceholder}>Тут зʼявляться фото зі звіту</div>
-          )}
-        </div>
+        {additionalImages.length > 0 && (
+          <button type="button" className={styles.galleryTrigger} onClick={() => openLightbox(1)}>
+            Переглянути фото зі звіту
+          </button>
+        )}
 
         <div className={styles.actions}>
           <Link to="/requisites" className={`uiButton ${styles.cta}`}>
@@ -102,6 +114,9 @@ const CampaignReportPage: FC = () => {
           </Link>
         </div>
       </article>
+      {images.length > 0 && (
+        <Lightbox images={images} index={lightboxIndex ?? 0} open={lightboxIndex !== null} onClose={closeLightbox} />
+      )}
     </section>
   )
 }

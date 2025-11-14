@@ -89,7 +89,13 @@ const CampaignCard: FC<{ campaign: Campaign }> = ({ campaign }) => {
         </span>
         <span>{isClosed ? `Закрито: ${campaign.deadline}` : `До: ${campaign.deadline}`}</span>
       </div>
-      <div className={styles.progressBarWrapper}>
+      <div
+        className={
+          isClosed
+            ? `${styles.progressBarWrapper} ${styles.progressBarWrapperClosed}`
+            : styles.progressBarWrapper
+        }
+      >
         <div
           className={`${styles.progressBar} ${isClosed ? styles.progressBarClosed : ''}`}
           style={{ width: `${progress}%` }}
@@ -104,7 +110,11 @@ const CampaignCard: FC<{ campaign: Campaign }> = ({ campaign }) => {
       </div>
       <Link
         to={isClosed ? `/campaigns/${campaign.id}/report` : '/requisites'}
-        className={`uiButton ${styles.cta} ${isClosed ? 'uiButton--ghost' : ''}`}
+        className={
+          isClosed
+            ? `uiButton uiButton--ghost ${styles.cta} ${styles.ctaClosed}`
+            : `uiButton ${styles.cta}`
+        }
       >
         {isClosed ? 'Переглянути звіт' : 'Підтримати'}
       </Link>
@@ -118,7 +128,7 @@ const CampaignsPage: FC = () => {
   const finishedCampaigns = useMemo(() => closedCampaigns, [])
 
   return (
-    <section className={styles.page}>
+    <section className={`${styles.page} pageShell`}>
       {/* <div className={styles.heading}>
         <h1>Керування зборами</h1>
         <p>Відстежуй активні кампанії та переглядай звіти для вже закритих зборів.</p>

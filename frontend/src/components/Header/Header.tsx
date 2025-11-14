@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import ThemeSwitch from '../ThemeSwitch/ThemeSwitch'
 import styles from './Header.module.css'
 
 const navItems = [
@@ -15,36 +16,39 @@ const Header: FC = () => {
 
   return (
     <header className={styles.header}>
-      <Link to="/" className={styles.brand}>
-        <span className={styles.mark}>AV</span> Donations
-      </Link>
-      <nav className={styles.nav}>
-        {navItems.map((item) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
-            className={({ isActive }) =>
-              isActive ? `${styles.link} ${styles.linkActive}` : styles.link
-            }
-          >
-            {item.label}
-          </NavLink>
-        ))}
-      </nav>
-      <div className={styles.actions}>
-        <Link className={`${styles.cta} ${styles.ctaDesktop}`} to="/requisites">
-          Задонатити
+      <div className={styles.inner}>
+        <Link to="/" className={styles.brand}>
+          <span className={styles.mark}>AV</span> Donations
         </Link>
-        <button
-          type="button"
-          className={styles.burger}
-          aria-label="Відкрити меню"
-          onClick={() => setMenuOpen(true)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+        <nav className={styles.nav}>
+          {navItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) =>
+                isActive ? `${styles.link} ${styles.linkActive}` : styles.link
+              }
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </nav>
+        <div className={styles.actions}>
+          <ThemeSwitch className={styles.themeSwitchDesktop} />
+          <Link className={`${styles.cta} ${styles.ctaDesktop}`} to="/requisites">
+            Задонатити
+          </Link>
+          <button
+            type="button"
+            className={styles.burger}
+            aria-label="Відкрити меню"
+            onClick={() => setMenuOpen(true)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
       </div>
 
       {menuOpen && (
@@ -57,6 +61,10 @@ const Header: FC = () => {
           >
             ×
           </button>
+          <div className={styles.mobileTheme}>
+            <p className={styles.mobileThemeLabel}>Тема</p>
+            <ThemeSwitch className={styles.themeSwitchMobile} fullWidth />
+          </div>
           <div className={styles.mobileLinks}>
             {navItems.map((item) => (
               <NavLink
