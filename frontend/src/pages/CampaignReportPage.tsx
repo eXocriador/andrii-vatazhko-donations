@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import type { FC } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import Lightbox from '../components/Lightbox/Lightbox'
 import { getReportById } from '../data/reports'
 import styles from './CampaignReportPage.module.css'
+
+const Lightbox = lazy(() => import('../components/Lightbox/Lightbox'))
 
 const currency = new Intl.NumberFormat('uk-UA', {
   style: 'currency',
@@ -115,7 +116,14 @@ const CampaignReportPage: FC = () => {
         </div>
       </article>
       {images.length > 0 && (
-        <Lightbox images={images} index={lightboxIndex ?? 0} open={lightboxIndex !== null} onClose={closeLightbox} />
+        <Suspense fallback={null}>
+          <Lightbox
+            images={images}
+            index={lightboxIndex ?? 0}
+            open={lightboxIndex !== null}
+            onClose={closeLightbox}
+          />
+        </Suspense>
       )}
     </section>
   )

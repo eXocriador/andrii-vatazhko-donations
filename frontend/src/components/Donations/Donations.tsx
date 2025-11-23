@@ -40,13 +40,46 @@ const brandBadge: Record<Brand, string> = {
   paypal: 'paypal',
 }
 
-const Donations: FC = () => {
-  const [copied, setCopied] = useState<string | null>(null)
+const fallbackCopy = (value: string) => {
+  try {
+    const textarea = document.createElement('textarea')
+    textarea.value = value
+    textarea.setAttribute('readonly', '')
+    textarea.style.position = 'fixed'
+    textarea.style.left = '-9999px'
+    document.body.appendChild(textarea)
+    textarea.select()
+    const successful = document.execCommand('copy')
+    document.body.removeChild(textarea)
+    return successful
+  } catch {
+    return false
+  }
+}
 
-  const handleCopy = (value: string, label: string) => {
-    navigator.clipboard.writeText(value)
-    setCopied(label)
-    setTimeout(() => setCopied(null), 1500)
+const Donations: FC = () => {
+  const [feedback, setFeedback] = useState<{ label: string; status: 'success' | 'error' } | null>(
+    null,
+  )
+
+  const handleCopy = async (value: string, label: string) => {
+    let success = false
+
+    if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(value)
+        success = true
+      } catch {
+        success = false
+      }
+    }
+
+    if (!success) {
+      success = fallbackCopy(value)
+    }
+
+    setFeedback({ label, status: success ? 'success' : 'error' })
+    window.setTimeout(() => setFeedback(null), 1800)
   }
 
   return (
@@ -73,13 +106,26 @@ const Donations: FC = () => {
                 Відкрити форму
               </a>
             ) : (
-              <button
-                type="button"
-                className={`uiButton uiButton--block ${styles.actionButton}`}
-                onClick={() => handleCopy(req.value, req.label)}
-              >
-                {copied === req.label ? 'Скопійовано' : 'Скопіювати реквізит'}
-              </button>
+              <>
+                <button
+                  type="button"
+                  className={`uiButton uiButton--block ${styles.actionButton}`}
+                  onClick={() => handleCopy(req.value, req.label)}
+                >
+                  {feedback?.label === req.label
+                    ? feedback.status === 'success'
+                      ? 'Скопійовано'
+                      : 'Не вдалося скопіювати'
+                    : 'Скопіювати реквізит'}
+                </button>
+                <span aria-live="polite" className="visually-hidden">
+                  {feedback?.label === req.label
+                    ? feedback.status === 'success'
+                      ? `${req.label} скопійовано`
+                      : `Не вдалося скопіювати ${req.label}`
+                    : ''}
+                </span>
+              </>
             )}
           </article>
         ))}

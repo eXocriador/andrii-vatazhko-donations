@@ -89,6 +89,23 @@
   flex-shrink: 0;
 }
 
+.adminLink {
+  display: none;
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border-soft) 70%, transparent);
+  transition: color 150ms ease, border-color 150ms ease, background 150ms ease;
+}
+
+.adminLink:hover {
+  color: var(--accent-strong);
+  border-color: color-mix(in srgb, var(--border-bold) 80%, transparent);
+  background: color-mix(in srgb, var(--bg-surface-alt) 75%, transparent);
+}
+
 .themeSwitchDesktop {
   display: none;
 }
@@ -198,6 +215,16 @@
   color: var(--accent-strong);
 }
 
+.mobileAdmin {
+  align-self: flex-start;
+  text-decoration: none;
+  color: var(--accent-strong);
+  font-weight: 600;
+  border: 1px dashed var(--border-bold);
+  border-radius: 999px;
+  padding: 0.45rem 1.2rem;
+}
+
 .mobileCta {
   margin-top: 0.5rem;
   display: inline-flex;
@@ -222,6 +249,10 @@
 
   .themeSwitchDesktop {
     display: block;
+  }
+
+  .adminLink {
+    display: inline-flex;
   }
 
   .mobileTheme {
@@ -252,5 +283,18 @@
 
   .actions {
     gap: 0.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link,
+  .cta,
+  .burger,
+  .mobileCta {
+    transition: none;
+  }
+
+  .mobileMenu {
+    animation: none;
   }
 }

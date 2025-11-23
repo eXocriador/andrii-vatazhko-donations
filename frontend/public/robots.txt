@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://andrii-vatazhko-donations.vercel.app/sitemap.xml

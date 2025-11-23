@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import type { FC } from 'react'
-import Lightbox from '../../Lightbox/Lightbox'
 import type { Report } from '../../../types/report'
 import styles from './ReportCard.module.css'
+
+const Lightbox = lazy(() => import('../../Lightbox/Lightbox'))
 
 const formatCurrency = (value: number) =>
   new Intl.NumberFormat('uk-UA', {
@@ -89,12 +90,14 @@ const ReportCard: FC<{ report: Report }> = ({ report }) => {
         </div>
       )}
       {galleryImages.length > 0 && (
-        <Lightbox
-          images={galleryImages}
-          index={lightboxIndex ?? 0}
-          open={lightboxIndex !== null}
-          onClose={handleCloseLightbox}
-        />
+        <Suspense fallback={null}>
+          <Lightbox
+            images={galleryImages}
+            index={lightboxIndex ?? 0}
+            open={lightboxIndex !== null}
+            onClose={handleCloseLightbox}
+          />
+        </Suspense>
       )}
     </article>
   )

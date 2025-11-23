@@ -10,19 +10,21 @@ import AboutPage from './pages/AboutPage'
 import RequisitesPage from './pages/RequisitesPage'
 import CampaignsPage from './pages/CampaignsPage'
 import CampaignReportPage from './pages/CampaignReportPage'
+import AdminPage from './pages/AdminPage'
 
 const App: FC = () => (
   <BrowserRouter>
     <ScrollToTop />
     <div className="app">
       <Header />
-      <main className="main">
+      <main id="main" className="main">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/campaigns" element={<CampaignsPage />} />
           <Route path="/campaigns/:id/report" element={<CampaignReportPage />} />
           <Route path="/requisites" element={<RequisitesPage />} />
+          <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

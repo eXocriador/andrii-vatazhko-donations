@@ -16,9 +16,10 @@ const getSystemTheme = () => {
 
 type ThemeSwitchProps = {
   className?: string
+  fullWidth?: boolean
 }
 
-const ThemeSwitch: FC<ThemeSwitchProps> = ({ className }) => {
+const ThemeSwitch: FC<ThemeSwitchProps> = ({ className = '', fullWidth = false }) => {
   const clipId = useId()
   const [preference, setPreference] = useState<ThemePreference>(() => readThemePreference())
   const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(() => getSystemTheme())
@@ -52,7 +53,7 @@ const ThemeSwitch: FC<ThemeSwitchProps> = ({ className }) => {
   return (
     <button
       type="button"
-      className={`${styles.themeToggle} ${className ?? ''}`}
+      className={`${styles.themeToggle} ${fullWidth ? styles.fullWidth : ''} ${className}`}
       aria-label={`Перемкнути на ${nextTheme === 'dark' ? 'темну' : 'світлу'} тему`}
       title={`Тема: ${activeTheme === 'dark' ? 'Темна' : 'Світла'}`}
       onClick={toggleTheme}

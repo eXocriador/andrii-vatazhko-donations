@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import ThemeSwitch from '../ThemeSwitch/ThemeSwitch'
 import styles from './Header.module.css'
@@ -13,6 +13,77 @@ const navItems = [
 
 const Header: FC = () => {
   const [menuOpen, setMenuOpen] = useState(false)
+  const dialogRef = useRef<HTMLDivElement | null>(null)
+  const previousFocus = useRef<HTMLElement | null>(null)
+
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false)
+  }, [])
+
+  useEffect(() => {
+    if (!menuOpen) {
+      return undefined
+    }
+
+    previousFocus.current = document.activeElement as HTMLElement | null
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    const focusSelector =
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    const focusFirstElement = () => {
+      const focusable = dialogRef.current
+        ? Array.from(dialogRef.current.querySelectorAll<HTMLElement>(focusSelector))
+        : []
+      focusable[0]?.focus()
+    }
+
+    focusFirstElement()
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        closeMenu()
+        return
+      }
+
+      if (event.key !== 'Tab') {
+        return
+      }
+
+      const focusable = dialogRef.current
+        ? Array.from(dialogRef.current.querySelectorAll<HTMLElement>(focusSelector)).filter(
+            (el) => !el.hasAttribute('disabled'),
+          )
+        : []
+      if (focusable.length === 0) {
+        return
+      }
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+
+      if (event.shiftKey) {
+        if (document.activeElement === first) {
+          event.preventDefault()
+          last.focus()
+        }
+        return
+      }
+
+      if (document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = previousOverflow
+      previousFocus.current?.focus()
+    }
+  }, [menuOpen, closeMenu])
 
   return (
     <header className={styles.header}>
@@ -35,6 +106,9 @@ const Header: FC = () => {
         </nav>
         <div className={styles.actions}>
           <ThemeSwitch className={styles.themeSwitchDesktop} />
+          <Link to="/admin" className={styles.adminLink}>
+            Адмінка
+          </Link>
           <Link className={`${styles.cta} ${styles.ctaDesktop}`} to="/requisites">
             Задонатити
           </Link>
@@ -42,6 +116,8 @@ const Header: FC = () => {
             type="button"
             className={styles.burger}
             aria-label="Відкрити меню"
+            aria-controls="mobile-nav"
+            aria-expanded={menuOpen}
             onClick={() => setMenuOpen(true)}
           >
             <span />
@@ -52,12 +128,22 @@ const Header: FC = () => {
       </div>
 
       {menuOpen && (
-        <div className={styles.mobileMenu} role="dialog" aria-modal="true">
+        <div
+          ref={dialogRef}
+          id="mobile-nav"
+          className={styles.mobileMenu}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="mobile-nav-title"
+        >
+          <p id="mobile-nav-title" className="visually-hidden">
+            Мобільна навігація сайту
+          </p>
           <button
             type="button"
             className={styles.close}
             aria-label="Закрити меню"
-            onClick={() => setMenuOpen(false)}
+            onClick={closeMenu}
           >
             ×
           </button>
@@ -73,12 +159,15 @@ const Header: FC = () => {
                 className={({ isActive }) =>
                   isActive ? `${styles.mobileLink} ${styles.mobileLinkActive}` : styles.mobileLink
                 }
-                onClick={() => setMenuOpen(false)}
+                onClick={closeMenu}
               >
                 {item.label}
               </NavLink>
             ))}
-            <Link className={styles.mobileCta} to="/requisites" onClick={() => setMenuOpen(false)}>
+            <Link className={styles.mobileAdmin} to="/admin" onClick={closeMenu}>
+              Адмінка
+            </Link>
+            <Link className={styles.mobileCta} to="/requisites" onClick={closeMenu}>
               Задонатити
             </Link>
           </div>
