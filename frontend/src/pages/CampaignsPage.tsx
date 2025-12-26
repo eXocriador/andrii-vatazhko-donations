@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import type { FC } from 'react'
 import { Link } from 'react-router-dom'
+import SEO from '../components/common/SEO'
 import { reports } from '../data/reports'
 import styles from './CampaignsPage.module.css'
 
@@ -69,7 +70,8 @@ const currency = new Intl.NumberFormat('uk-UA', {
 })
 
 const CampaignCard: FC<{ campaign: Campaign }> = ({ campaign }) => {
-  const progress = Math.min(100, Math.round((campaign.raised / campaign.goal) * 100))
+  const progress =
+    campaign.goal > 0 ? Math.min(100, Math.round((campaign.raised / campaign.goal) * 100)) : 0
   const isClosed = campaign.status === 'closed'
 
   return (
@@ -128,12 +130,18 @@ const CampaignsPage: FC = () => {
   const finishedCampaigns = useMemo(() => closedCampaigns, [])
 
   return (
-    <section className={`${styles.page} pageShell`}>
-      {/* <div className={styles.heading}>
+    <>
+      <SEO
+        title="Збори та звіти"
+        description="Перегляньте активні збори та звіти по завершених кампаніях. Прозорість кожної гривні."
+        path="/campaigns"
+      />
+      <section className={`${styles.page} pageShell`}>
+        {/* <div className={styles.heading}>
         <h1>Керування зборами</h1>
         <p>Відстежуй активні кампанії та переглядай звіти для вже закритих зборів.</p>
       </div> */}
-      <div className={styles.tabs}>
+        <div className={styles.tabs}>
         <button
           type="button"
           className={
@@ -167,7 +175,8 @@ const CampaignsPage: FC = () => {
           ))}
         </div>
       )}
-    </section>
+      </section>
+    </>
   )
 }
 

@@ -50,41 +50,48 @@ const ThemeSwitch: FC<ThemeSwitchProps> = ({ className = '', fullWidth = false }
     })
   }
 
+  const isDark = activeTheme === 'dark'
+
   return (
     <button
       type="button"
-      className={`${styles.themeToggle} ${fullWidth ? styles.fullWidth : ''} ${className}`}
+      className={`${styles.themeToggle} ${fullWidth ? styles.fullWidth : ''} ${className} ${isDark ? styles.dark : styles.light}`}
       aria-label={`Перемкнути на ${nextTheme === 'dark' ? 'темну' : 'світлу'} тему`}
       title={`Тема: ${activeTheme === 'dark' ? 'Темна' : 'Світла'}`}
       onClick={toggleTheme}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
-        width="1em"
-        height="1em"
-        fill="currentColor"
-        strokeLinecap="round"
-        className={styles.classic}
-        viewBox="0 0 32 32"
-      >
-        <clipPath id={clipId}>
-          <path d="M0-5h30a1 1 0 0 0 9 13v24H0Z" />
-        </clipPath>
-        <g clipPath={`url(#${clipId})`}>
-          <circle cx="16" cy="16" r="9.34" />
-          <g stroke="currentColor" strokeWidth="1.5">
-            <path d="M16 5.5v-4" />
-            <path d="M16 30.5v-4" />
-            <path d="M1.5 16h4" />
-            <path d="M26.5 16h4" />
-            <path d="m23.4 8.6 2.8-2.8" />
-            <path d="m5.7 26.3 2.9-2.9" />
-            <path d="m5.8 5.8 2.8 2.8" />
-            <path d="m23.4 23.4 2.9 2.9" />
-          </g>
-        </g>
-      </svg>
+      <span className={styles.iconWrapper}>
+        {isDark ? (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={styles.icon}
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        ) : (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={styles.icon}
+          >
+            <circle cx="12" cy="12" r="5" />
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+          </svg>
+        )}
+      </span>
     </button>
   )
 }

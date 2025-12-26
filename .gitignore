@@ -65,6 +65,10 @@ web_modules/
 # Yarn Integrity file
 .yarn-integrity
 
+# npm lock files (using Yarn)
+package-lock.json
+**/package-lock.json
+
 # dotenv environment variable files
 .env
 .env.*

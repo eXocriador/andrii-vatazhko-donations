@@ -1,14 +1,43 @@
 .themeToggle {
-  width: 46px;
-  height: 46px;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
   border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--theme-switch-border) 60%, transparent);
-  background: color-mix(in srgb, var(--theme-switch-bg) 90%, transparent);
-  display: inline-flex;
+  border: 1px solid var(--theme-switch-border);
+  background: var(--theme-switch-bg);
+  display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: var(--text-primary);
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.themeToggle:hover {
+  background: color-mix(in srgb, var(--theme-switch-bg) 95%, var(--accent) 5%);
+  border-color: var(--accent);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.themeToggle:active {
+  transform: scale(0.95);
+}
+
+.themeToggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .fullWidth {
@@ -18,13 +47,34 @@
   height: 48px;
 }
 
-.themeToggle:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-.classic {
-  width: 26px;
-  height: 26px;
+.icon {
+  width: 22px;
+  height: 22px;
   display: block;
+  margin: 0 auto;
+  padding: 0;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.themeToggle:hover .icon {
+  transform: rotate(15deg);
+}
+
+.light .icon {
+  color: #fbbf24;
+}
+
+.dark .icon {
+  color: #fbbf24;
 }

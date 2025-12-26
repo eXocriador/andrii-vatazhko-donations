@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import type { FC } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './Donations.module.css'
 
 type Brand = 'monobank' | 'card' | 'paypal'
@@ -41,26 +41,40 @@ const brandBadge: Record<Brand, string> = {
 }
 
 const fallbackCopy = (value: string) => {
+  const textarea = document.createElement('textarea')
+  textarea.value = value
+  textarea.setAttribute('readonly', '')
+  textarea.style.position = 'fixed'
+  textarea.style.left = '-9999px'
+
   try {
-    const textarea = document.createElement('textarea')
-    textarea.value = value
-    textarea.setAttribute('readonly', '')
-    textarea.style.position = 'fixed'
-    textarea.style.left = '-9999px'
     document.body.appendChild(textarea)
     textarea.select()
     const successful = document.execCommand('copy')
-    document.body.removeChild(textarea)
     return successful
   } catch {
     return false
+  } finally {
+    if (document.body.contains(textarea)) {
+      document.body.removeChild(textarea)
+    }
   }
 }
 
 const Donations: FC = () => {
-  const [feedback, setFeedback] = useState<{ label: string; status: 'success' | 'error' } | null>(
-    null,
-  )
+  const [feedback, setFeedback] = useState<{
+    label: string
+    status: 'success' | 'error'
+  } | null>(null)
+  const timeoutRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current !== null) {
+        window.clearTimeout(timeoutRef.current)
+      }
+    }
+  }, [])
 
   const handleCopy = async (value: string, label: string) => {
     let success = false
@@ -79,7 +93,15 @@ const Donations: FC = () => {
     }
 
     setFeedback({ label, status: success ? 'success' : 'error' })
-    window.setTimeout(() => setFeedback(null), 1800)
+
+    if (timeoutRef.current !== null) {
+      window.clearTimeout(timeoutRef.current)
+    }
+
+    timeoutRef.current = window.setTimeout(() => {
+      setFeedback(null)
+      timeoutRef.current = null
+    }, 1800)
   }
 
   return (

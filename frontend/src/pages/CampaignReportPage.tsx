@@ -1,8 +1,10 @@
 import { lazy, Suspense, useState } from 'react'
 import type { FC } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
+import SEO from '../components/common/SEO'
 import { getReportById } from '../data/reports'
 import styles from './CampaignReportPage.module.css'
+import LightboxLoader from '../components/Lightbox/LightboxLoader'
 
 const Lightbox = lazy(() => import('../components/Lightbox/Lightbox'))
 
@@ -20,8 +22,10 @@ const CampaignReportPage: FC = () => {
     return <Navigate to="/campaigns" replace />
   }
 
-  const progress = Math.min(100, Math.round((report.amountRaised / report.goal) * 100))
-  const images = report.images.map((image) => ({ src: image.src, alt: image.alt }))
+  const progress = report.goal > 0
+    ? Math.min(100, Math.round((report.amountRaised / report.goal) * 100))
+    : 0
+  const images = report.images?.map((image) => ({ src: image.src, alt: image.alt })) ?? []
   const [heroImage, ...additionalImages] = images
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
@@ -34,7 +38,13 @@ const CampaignReportPage: FC = () => {
   const closeLightbox = () => setLightboxIndex(null)
 
   return (
-    <section className={`${styles.page} pageShell`}>
+    <>
+      <SEO
+        title={report.title}
+        description={report.summary}
+        path={`/campaigns/${report.id}/report`}
+      />
+      <section className={`${styles.page} pageShell`}>
       <Link to="/campaigns" className={`uiBackLink ${styles.backLink}`}>
         ← Повернутися до зборів
       </Link>
@@ -116,7 +126,7 @@ const CampaignReportPage: FC = () => {
         </div>
       </article>
       {images.length > 0 && (
-        <Suspense fallback={null}>
+        <Suspense fallback={<LightboxLoader />}>
           <Lightbox
             images={images}
             index={lightboxIndex ?? 0}
@@ -125,7 +135,8 @@ const CampaignReportPage: FC = () => {
           />
         </Suspense>
       )}
-    </section>
+      </section>
+    </>
   )
 }
 

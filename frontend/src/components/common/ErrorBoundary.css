@@ -1,0 +1,80 @@
+.error-boundary {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.error-boundary__content {
+  max-width: 600px;
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.error-boundary__content h1 {
+  margin: 0 0 1rem;
+  font-size: 2rem;
+  color: var(--text-primary);
+}
+
+.error-boundary__content p {
+  margin: 0 0 2rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.error-boundary__details {
+  margin: 2rem 0;
+  text-align: left;
+  background: var(--bg-surface-alt);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.error-boundary__details summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.error-boundary__details pre {
+  margin: 0.5rem 0 0;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.error-boundary__stack {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.error-boundary__actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .error-boundary__actions {
+    flex-direction: column;
+  }
+
+  .error-boundary__actions .uiButton {
+    width: 100%;
+  }
+}
+
